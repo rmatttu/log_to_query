@@ -4,7 +4,7 @@ Query log(placeholder query + params) to query.
 
 ```log
 2024-01-01 02:03:04.567 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==>  Preparing: UPDATE my_table SET name = ?, value = ? WHERE id = ?
-2024-01-19 16:59:18.846 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==> Parameters: test(String), 1234(Integer), 5678(Long)
+2024-01-01 02:03:05.567 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==> Parameters: test(String), 1234(Integer), 5678(Long)
 ```
 
 ↓
@@ -24,7 +24,7 @@ Sample
 ```bash
 python log_to_query.py \
   "2024-01-01 02:03:04.567 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==>  Preparing: UPDATE my_table SET name = ?, value = ? WHERE id = ?" \
-  "2024-01-19 16:59:18.846 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==> Parameters: test(String), 1234(Integer), 5678(Long)"
+  "2024-01-01 02:03:05.567 DEBUG 1234 --- [nio-8080-exec-1] j.s.r.mapper.MyMapper.update : ==> Parameters: test(String), 1234(Integer), 5678(Long)"
 ```
 
 ## Requirements
