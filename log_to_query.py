@@ -7,10 +7,11 @@ __version__ = "0.0.1"
 
 
 @dataclass
-class SimpleArgs(object):
+class Args(object):
     """Args"""
 
-    src: list[str]
+    placeholder_query: str
+    params_text: str
 
 
 class QueryParameterError(Exception):
@@ -101,10 +102,14 @@ def main():
     """Query log(placeholder query + params) to query."""
     parser = argparse.ArgumentParser(description=main.__doc__)
     parser.add_argument(
-        "src",
-        nargs="+",
+        "placeholder_query",
         type=str,
-        help="Target log text.",
+        help="Placeholder query log. e.g. '... Preparing: UPDATE my_table SET name = ?, value = ? WHERE id = ?'",
+    )
+    parser.add_argument(
+        "params_text",
+        type=str,
+        help="Parameters log. e.g. '... Parameters: test(String), 1234(Integer), 5678(Long)'",
     )
     parser.add_argument(
         "-v",
@@ -113,13 +118,13 @@ def main():
         version=__version__,
         help="Show version and exit",
     )
-    args = parser.parse_args()  # type: SimpleArgs
+    args = parser.parse_args()  # type: Args
 
     local_timezone = datetime.datetime.now().astimezone().tzinfo
     start_datetime = datetime.datetime.now(local_timezone)
     start_datetime_text = start_datetime.strftime("%Y-%m-%d_%H-%M-%S")
 
-    result = DetectedQuery.detect(args.src[0], args.src[1])
+    result = DetectedQuery.detect(args.placeholder_query, args.params_text)
     print(result.query)
 
 

@@ -16,7 +16,7 @@ UPDATE my_table SET name = "test", value = 1234 WHERE id = 5678;
 ## Usage
 
 ```bash
-python log_to_query.py "<placeholder_query>" "<params>"
+python log_to_query.py "<placeholder_query>" "<params_text>"
 ```
 
 Sample
